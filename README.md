@@ -1,2 +1,2 @@
-# fcc-api
-freeCodeCamp's projects API
+# freeCodeCamp
+All Free Code Camp projects
