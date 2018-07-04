@@ -22,7 +22,7 @@ mongoose.promise = global.Promise;
 const isProduction = process.env.NODE_ENV === 'production';
 
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'ejs');
 
 // use HTML as the view engine
