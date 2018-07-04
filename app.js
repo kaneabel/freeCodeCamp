@@ -29,8 +29,16 @@ const isProduction = process.env.NODE_ENV === 'production';
 app.engine('html', ejs.renderFile);
 app.set('view engine', 'html');
 
+let uri = 'mongodb://localhost/fcc-api';
+
+if (isProduction) {
+  const dbuser = process.env.DB_USER
+  const dbpassword = process.env.DB_PASSWORD
+  uri = `mongodb://${dbuser}:${dbpassword}@ds125851.mlab.com:25851/fcc-api`;
+}
+
 // Configure Mongoose
-mongoose.connect('mongodb://localhost/node-passport-jwt', (err) => {
+mongoose.connect(uri, (err) => {
   if (err) {
     throw err;
   }
@@ -46,7 +54,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  secret: 'node-passport-jwt',
+  secret: 'fcc-api',
   cookie: { maxAge: 60000 },
   resave: false,
   saveUninitialized: false
@@ -61,10 +69,6 @@ app.use(require('./routes/index'));
 app.use((req, res, next) => {
   next(createError(404));
 });
-
-if(!isProduction) {
-  app.use(errorHandler());
-}
 
 // error handler
 app.use((err, req, res, next) => {

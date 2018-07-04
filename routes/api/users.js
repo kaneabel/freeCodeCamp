@@ -10,17 +10,13 @@ router.post('/', auth.optional, (req, res, next) => {
 
   if(!user.email) {
     return res.status(422).json({
-      errors: {
-        email: 'is required',
-      },
+      error: 'email is required',
     });
   }
 
   if(!user.password) {
     return res.status(422).json({
-      errors: {
-        password: 'is required',
-      },
+      error: 'password is required',
     });
   }
 
@@ -38,17 +34,13 @@ router.post('/login', auth.optional, (req, res, next) => {
 
   if(!user.email) {
     return res.status(422).json({
-      errors: {
-        email: 'is required',
-      },
+      error: 'email is required',
     });
   }
 
   if(!user.password) {
     return res.status(422).json({
-      errors: {
-        password: 'is required',
-      },
+      error: 'password is required',
     });
   }
 
