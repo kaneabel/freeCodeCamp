@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { fbAppId } from "../constants";
 
 export default {
   /**
@@ -11,7 +12,7 @@ export default {
     return new Promise((resolve) => {
       $.getScript('//connect.facebook.net/en_US/sdk.js', () => {
         window.FB.init({
-          appId,
+          appId: fbAppId,
           autoLogAppEvents: true,
           xfbml: true,
           version: 'v3.0',

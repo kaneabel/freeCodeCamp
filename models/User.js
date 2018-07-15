@@ -36,7 +36,7 @@ UserSchema.methods.generateJWT = function() {
     email: this.email,
     id: this._id,
     exp: parseInt(expirationDate.getTime() / 1000, 10),
-  }, 'fcc-api');
+  }, 'fcc');
 }
 
 UserSchema.methods.toAuthJSON = function() {
