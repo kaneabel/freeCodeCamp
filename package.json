@@ -1,5 +1,5 @@
 {
-  "name": "node-passport-jwt",
+  "name": "freecodecamp-server",
   "version": "0.0.1",
   "private": true,
   "author": "Tuan Tran",
@@ -27,5 +27,6 @@
   "devDependencies": {
     "nodemon": "^1.17.5"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "proxy": "http://localhost:3000/"
 }
