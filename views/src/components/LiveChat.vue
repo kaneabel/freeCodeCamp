@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import fb from '@/utils/fb';
 import { fbPageId } from '../constants';
 
 export default {
@@ -18,6 +19,9 @@ export default {
     return {
       pageId: fbPageId,
     };
+  },
+  created() {
+    fb.init();
   },
 };
 </script>

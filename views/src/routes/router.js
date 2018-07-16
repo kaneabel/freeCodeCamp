@@ -17,5 +17,10 @@ export default new Router({
       name: 'Login',
       component: Login,
     },
+    {
+      path: '/voting',
+      name: 'Voting',
+      component: () => import('@/pages/Voting/Index'),
+    },
   ],
 });

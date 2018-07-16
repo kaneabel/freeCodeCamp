@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { fbAppId } from "../constants";
+import { fbAppId } from '../constants';
 
 export default {
   /**
@@ -8,7 +8,7 @@ export default {
    * @param appId
    * @returns {Promise<any>}
    */
-  init(appId) {
+  init() {
     return new Promise((resolve) => {
       $.getScript('//connect.facebook.net/en_US/sdk.js', () => {
         window.FB.init({
