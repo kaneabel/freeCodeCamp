@@ -1,36 +1,63 @@
 <template>
-  <fb:login-button scope="public_profile,email" onlogin="checkLoginState()">
-  </fb:login-button>
+  <button class="btn btn-primary" @click.prevent="loginClicked()">
+    Login with Facebook
+  </button>
 </template>
 
 <script>
-  export default {
-    methods: {
-      statusChangeCallback(response) {
-        console.log('statusChangeCallback');
-        console.log(response);
+import fb from '@/utils/fb';
+
+export default {
+  name: 'FbLogin',
+  date() {
+    return {
+      trigger: false,
+    };
+  },
+  methods: {
+    loginClicked() {
+      const vm = this;
+      this.trigger = true;
+      window.FB.login((response) => {
+        vm.checkLoginState();
+      }, {scope: 'public_profile, email'});
+    },
+
+    checkLoginState() {
+      const vm = this;
+      window.FB.getLoginStatus((response) => {
         if (response.status === 'connected') {
-          // Logged into your app and Facebook.
-          this.testAPI();
+          vm.getUser();
+          if (vm.trigger) {
+            vm.$router.push({ name: 'Home' });
+          }
         } else {
-          console.log('disconnected FB')
+          vm.$router.push({ name: 'Login' });
         }
-      },
+      });
+    },
 
-      checkLoginState() {
-        FB.getLoginStatus(function(response) {
-          this.statusChangeCallback(response);
-        });
-      },
+    getUser() {
+      const vm = this;
+      const params = {
+        fields: 'name,email,picture',
+      };
+      window.FB.api('/me', params, (response) => {
+        console.log('__response__: ', response);
+        const payload = {
+          name: response.name,
+          avatar: response.picture.data.url,
+        };
+        vm.$emit('user', payload);
+      });
+    },
+  },
 
-      testAPI() {
-        console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', function(response) {
-          console.log('Successful login for: ' + response.name);
-          document.getElementById('status').innerHTML =
-            'Thanks for logging in, ' + response.name + '!';
-        });
-      },
-    }
-  }
+  created() {
+    const vm = this;
+    fb.init().then(() => {
+      vm.checkLoginState();
+    });
+  },
+};
 </script>

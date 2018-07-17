@@ -37,3 +37,23 @@
 ::-webkit-scrollbar-track {
   background-color:rgba(50,50,50,0.05);
 }
+
+.text-right {
+  text-align: right;
+}
+
+.ui__avatar {
+  @include flexbox();
+  @include align-items(center);
+  float: right;
+  overflow: hidden;
+
+  img {
+    margin-right: 5px;
+    height: 32px;
+  }
+
+  .name {
+    font-size: 14px;
+  }
+}
